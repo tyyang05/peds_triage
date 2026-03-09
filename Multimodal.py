@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, cohen_kappa_score
 
 def tabular_feature(data):
+    #deal with NaN
+    data = data.fillna(data.mean())
     scaler = StandardScaler()
     return scaler.fit_transform(data)
 
@@ -17,14 +19,19 @@ def text_feature(data):
     model = AutoModel.from_pretrained(model_name)
     #account for the NaN values and convert the text to strings
     data = [str(text) for text in data]
-    #tokenize the strings and add padding/truncate to ensure they are the same length
-    text_input = tokenizer(data, return_tensors="pt", padding=True, truncation=True, max_length=512)
-    # we do not need the gradient here since we are just extracting features
-    with torch.no_grad():
-        outputs = model(**text_input)
-    #we only need the CLS token which is at index 0 of the last layer
-    CLS_token = outputs.last_hidden_state[:,0,:]
-    return CLS_token.numpy()
+    full_list = []
+    #process it in 20 smaller batches in order to improve memory usage
+    for i in range(0,len(data), 20):
+        batch = data[i: i+20]
+        #tokenize the strings and add padding/truncate to ensure they are the same length
+        text_input = tokenizer(batch, return_tensors="pt", padding=True, truncation=True, max_length=512)
+        # we do not need the gradient here since we are just extracting features
+        with torch.no_grad():
+            outputs = model(**text_input)
+        #we only need the CLS token which is at index 0 of the last layer
+        CLS_token = outputs.last_hidden_state[:,0,:]
+        full_list.append(CLS_token)
+    return np.vstack(full_list)
 
 def fusion_model(data):
     data['y'] = data['acuity'] - 1
