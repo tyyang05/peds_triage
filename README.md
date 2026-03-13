@@ -8,6 +8,8 @@ While machine learning models have been developed to predict Emergency Severity 
 To address this gap, we propose a multimodal learning framework that explicitly balances structured and unstructured EHR data to improve pediatric triage. Our goal is to develop a model that jointly leverages vital signs and clinical text, using modality dropout to ensure that neither modality dominates, in order to more accurately assign patients to triage categories and ultimately improve patient outcomes.
 
 This repository has three main files:
-`triage_tabular_baseline.ipynb` — single modality tabular-only models.
+`triage_tabular_baseline.ipynb` — single modality tabular-only models. 
+
 `triage_text_baseline.ipynb` - single modality text-only models.
+
 `mm_latefusion_moddrop.ipynb` - late fusion multimodal model.
