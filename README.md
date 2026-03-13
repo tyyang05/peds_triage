@@ -13,4 +13,6 @@ This repository has three main files:
 
 `triage_text_baseline.ipynb` - single modality text-only models. 
 
-`mm_latefusion_moddrop.ipynb` - late fusion multimodal model.
+`mm_latefusion_moddrop.ipynb` - late fusion multimodal models with and without modality dropout.
+
+Preprocessing and analysis was done in R Studio because Tyler is more fluent in R.
