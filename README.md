@@ -15,4 +15,8 @@ This repository has three main files:
 
 `mm_latefusion_moddrop.ipynb` - late fusion multimodal models with and without modality dropout.
 
-Preprocessing and analysis was done in R Studio because Tyler is more fluent in R.
+Preprocessing and analysis was done in R Studio because Tyler is more fluent in R:
+
+`tyrm-preprocessing.R` — preprocessing data.
+
+`peds_triage_graphs.R` — analysis of results + figure creation. 
