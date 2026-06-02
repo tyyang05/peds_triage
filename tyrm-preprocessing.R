@@ -20,18 +20,14 @@ ed2020 = ed2020_raw %>%
   mutate(across(everything(), as_factor)) %>% # Converts coded numbers to label factors
   mutate(across(everything(), as.character)) %>%
   select(RACEUN, RACERETH, SEX, AGE,
-         TEMPF, PULSE, RESPR, BPSYS, BPDIAS, POPCT, PAINSCALE, ADMIT,
-         IMMEDR,
-         RFV1) 
+         TEMPF, PULSE, RESPR, BPSYS, BPDIAS, POPCT, PAINSCALE, ADMIT, IMMEDR, RFV1) 
 
 ed2022_raw = read_dta('/Users/Tyler/Documents/Stanford Classes/CS229/CS229Final/Source Files/NHAMCS/ed2022-stata.dta') 
 ed2022 = ed2022_raw %>%
   mutate(across(everything(), as_factor)) %>% # Converts coded numbers to label factors
   mutate(across(everything(), as.character)) %>%
   select(RACEUN, RACERETH, SEX, AGE,
-         TEMPF, PULSE, RESPR, BPSYS, BPDIAS, POPCT, PAINSCALE, ADMIT,
-         IMMEDR,
-         RFV1) 
+         TEMPF, PULSE, RESPR, BPSYS, BPDIAS, POPCT, PAINSCALE, ADMIT, IMMEDR, RFV1) 
 
 NHAMCS_data = rbind(ed2020, ed2021, ed2022)
 cleaned_NHAMCS = NHAMCS_data %>%
@@ -66,17 +62,15 @@ cleaned_NHAMCS = NHAMCS_data %>%
                   .x == "Blank" ~ NA,
                   .x == "DOPP or DOPPLER" ~ NA, 
                   .x == "P, Palp, DOP or DOPPLER" ~ NA,
-                  TRUE ~ as.character(.x)
-                )))) %>%          
+                  TRUE ~ as.character(.x))))) %>%          
   mutate(resprate = case_when(
     resprate > 70 ~ NA,  # anything higher than 70 is noise
-    resprate < 4  ~ NA,  # rates below 4 are usually incompatible with life without a vent
+    resprate < 4  ~ NA,  # rates below 4 are usually not possible
     TRUE          ~ resprate)) %>%
   mutate(heartrate = case_when(
-    heartrate > 250 ~ NA,  # values this high are almost always monitor artifact
-    heartrate < 20  ~ NA,  # extremely unlikely without cardiac arrest / bad sensor
-    TRUE            ~ heartrate
-  )) %>%
+    heartrate > 250 ~ NA,  
+    heartrate < 20  ~ NA,  
+    TRUE            ~ heartrate)) %>%
   mutate(sbp = case_when(
     sbp > 250 ~ NA, 
     sbp < 40  ~ NA,  
