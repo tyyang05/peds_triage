@@ -15,10 +15,12 @@ This repository has three main files:
 
 `mm_latefusion_moddrop.ipynb` - late fusion multimodal models with and without modality dropout.
 
+`mm_earlyfusion.ipynb` - early fusion multimodal models with and without modality dropout (CS221).
+
 Preprocessing and analysis was done in R Studio:
 
 `tyrm-preprocessing.R` — preprocessing data.
 
-`peds_triage_graphs.R` — analysis of results + figure creation for just late fusion (CS229)
+`peds_triage_graphs.R` — analysis of results + figure creation for just late fusion (CS229).
 
-`221peds_triage_graphs.R` — analysis of results + figure creation for early fusion expansion (CS221)
+`221peds_triage_graphs.R` — analysis of results + figure creation for early fusion expansion (CS221).
