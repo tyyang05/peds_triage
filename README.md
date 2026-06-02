@@ -19,4 +19,6 @@ Preprocessing and analysis was done in R Studio:
 
 `tyrm-preprocessing.R` — preprocessing data.
 
-`peds_triage_graphs.R` — analysis of results + figure creation. 
+`peds_triage_graphs.R` — analysis of results + figure creation for just late fusion (CS229)
+
+`221peds_triage_graphs.R` — analysis of results + figure creation for early fusion expansion (CS221)
